@@ -99,7 +99,7 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
     }
   };
 
-  const dateDisplay = hasSelectedDates && startDate && endDate && nights > 0
+  const dateDisplay = (selectionStep === 2) && startDate && endDate && nights > 0
     ? `${format(startDate, 'MMM d')} – ${format(endDate, 'MMM d, yyyy')}`
     : 'Add dates';
 

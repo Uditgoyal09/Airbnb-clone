@@ -271,7 +271,7 @@ export default function Navbar() {
                       <div className={styles.flexibleContainer}>
                         <div className={styles.stayLengthPills}>
                           {['Weekend', 'Week', 'Month'].map(length => (
-                            <button key={length} type="button" className={`${styles.stayLengthPill} ${flexibleStayLength === length ? styles.stayLengthPillActive : ''}`} onClick={() => setFlexibleStayLength(length)}>{length}</button>
+                            <button key={length} type="button" className={`${styles.stayLengthPill} ${flexibleStayLength === length ? styles.stayLengthPillActive : ''}`} onClick={() => setFlexibleStayLength(length as 'Weekend' | 'Week' | 'Month')}>{length}</button>
                           ))}
                         </div>
                       </div>
@@ -299,9 +299,9 @@ export default function Navbar() {
                             <div className={styles.guestDesc}>{desc}</div>
                           </div>
                           <div className={styles.guestControls}>
-                            <button type="button" onClick={() => setGuests(g => ({ ...g, [key]: Math.max(0, g[key] - 1) }))} disabled={guests[key] === 0}>-</button>
-                            <span>{guests[key]}</span>
-                            <button type="button" onClick={() => setGuests(g => ({ ...g, [key]: g[key] + 1 }))}>+</button>
+                            <button type="button" onClick={() => setGuests(g => ({ ...g, [key]: Math.max(0, g[key as keyof typeof g] - 1) }))} disabled={guests[key as keyof typeof guests] === 0}>-</button>
+                            <span>{guests[key as keyof typeof guests]}</span>
+                            <button type="button" onClick={() => setGuests(g => ({ ...g, [key]: g[key as keyof typeof g] + 1 }))}>+</button>
                           </div>
                         </div>
                       ))}
