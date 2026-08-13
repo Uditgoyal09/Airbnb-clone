@@ -1,0 +1,1014 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+  transition: padding-bottom 0.2s ease;
+}
+
+.headerExpanded {
+  padding-bottom: 24px;
+}
+
+.headerCollapsed {
+  padding-bottom: 0;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Top Row --- */
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex: 1 0 140px;
+}
+
+.fullLogo {
+  height: 32px;
+  width: auto;
+  display: none;
+}
+
+@media (min-width: 1128px) {
+  .fullLogo {
+    display: block;
+  }
+}
+
+/* Fallback for smaller screens if we want to show just the icon, but Airbnb often shows full logo everywhere now. We'll show full logo everywhere for simplicity, matching the requirement 'exact same logo'. */
+.fullLogo { display: block; height: 34px; }
+
+
+/* Center Nav (Stays/Experiences) */
+.centerNav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.centerNavVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.centerNavHidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+.navTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.navTab:hover {
+  opacity: 1;
+  color: var(--text-dark);
+}
+
+.navTabActive {
+  color: var(--text-dark);
+  font-weight: 600;
+  opacity: 1;
+  border-bottom: 2px solid var(--text-dark);
+  border-radius: 0;
+  padding-bottom: 8px;
+}
+
+.navIcon {
+  font-size: 24px;
+}
+
+.navText {
+  font-size: 14px;
+}
+
+/* Collapsed Pill */
+.collapsedPill {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 8px 8px 8px 24px;
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s, visibility 0.2s;
+  position: absolute;
+  left: 50%;
+  transform-origin: center center;
+}
+
+.collapsedPillVisible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.collapsedPillHidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(20px) scale(1.1);
+}
+
+.collapsedPill:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.searchText {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  padding: 0 16px;
+  white-space: nowrap;
+}
+
+.searchLight {
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.searchDivider {
+  height: 24px;
+  width: 1px;
+  background-color: var(--border);
+}
+
+.searchIconSmall {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+/* User Menu */
+.userMenu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 0 140px;
+  gap: 8px;
+}
+
+.hostLink {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: none;
+}
+
+@media (min-width: 744px) {
+  .hostLink {
+    display: block;
+  }
+}
+
+.hostLink:hover {
+  background-color: var(--background-light);
+}
+
+.globeIcon {
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globeIcon:hover {
+  background-color: var(--background-light);
+}
+
+.profileDropdown {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 5px 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 21px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  position: relative;
+}
+
+.profileDropdown:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  width: 240px;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdownItem:hover {
+  background-color: var(--background-light);
+}
+
+.dropdownDivider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 8px 0;
+}
+
+.dropdownUserInfo {
+  padding: 12px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdownUserName {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.dropdownUserRole {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.dropdownSection {
+  padding: 8px 16px 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+.userSwitchBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.activeUser {
+  background-color: var(--background-light);
+  font-weight: 700;
+}
+
+
+/* --- Expanded Search Bar --- */
+.expandedSearchWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  transition: height 0.2s ease, opacity 0.2s ease, margin 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  transform-origin: top center;
+}
+
+.expandedSearchVisible {
+  height: 66px;
+  opacity: 1;
+  visibility: visible;
+  margin-top: 16px;
+  transform: scale(1) translateY(0);
+}
+
+.expandedSearchHidden {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  margin-top: 0;
+  pointer-events: none;
+  transform: scale(0.95) translateY(-10px);
+}
+
+.expandedSearchBar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  box-shadow: var(--shadow-md);
+  height: 66px;
+  max-width: 850px;
+  width: 100%;
+  position: relative;
+}
+
+.searchBlock {
+  flex: 1;
+  padding: 12px 32px;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 100%;
+  position: relative;
+}
+
+.searchBlock:hover {
+  background-color: var(--background-light);
+}
+
+.searchBlockLabel {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.searchBlockValue {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.searchBlockInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-dark);
+  padding: 0;
+  margin-top: 2px;
+  width: 100%;
+}
+
+.searchBlockInput::placeholder {
+  color: var(--text-light);
+}
+
+.searchBlockDivider {
+  width: 1px;
+  height: 32px;
+  background-color: var(--border);
+}
+
+.searchBlockGuests {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.guestInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.bigSearchBtn {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 24px;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.bigSearchBtn:hover {
+  background-color: var(--primary-hover);
+}
+
+.bigSearchBtnExpanded {
+  width: auto;
+  padding: 14px 24px;
+}
+
+/* Active Search Bar States */
+.searchBarActive {
+  background: var(--background-light);
+}
+
+.searchBlockActive {
+  background: white;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  border-radius: 32px;
+}
+
+.searchBlockActive:hover {
+  background: white;
+}
+
+.hasValue {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Popover Container */
+.popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  padding: 24px;
+  z-index: 100;
+  cursor: default;
+}
+
+/* --- Mobile Responsive Updates --- */
+@media (max-width: 744px) {
+  .topRow {
+    height: 70px;
+  }
+  
+  .logo {
+    display: flex;
+    flex: 0 0 auto;
+  }
+  
+  .centerNav {
+    display: none; /* Hide stays/experiences on mobile */
+  }
+  
+  .userMenu {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+  
+  .hostLink, .globeIcon {
+    display: none; /* Hide extra actions on mobile */
+  }
+
+  .collapsedPill {
+    position: relative;
+    left: auto;
+    transform: none !important;
+    width: auto;
+    flex: 1;
+    margin: 0 12px;
+  }
+
+  /* Make expanded search stacked on mobile */
+  .expandedSearchWrapper {
+    height: auto;
+    transition: none;
+  }
+  
+  .expandedSearchVisible {
+    height: auto;
+    margin-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .expandedSearchHidden {
+    display: none; /* Just hide it instead of complex height transition on mobile */
+  }
+
+  .expandedSearchBar {
+    flex-direction: column;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .searchBlock {
+    width: 100%;
+    padding: 12px 20px;
+    height: auto;
+  }
+
+  .searchBlockDivider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .searchBlockGuests {
+    padding-right: 20px;
+  }
+
+  .bigSearchBtn {
+    margin-top: 12px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Make popovers full width and fit the screen */
+  .popover, .destinationsPopover, .calendarPopover, .whenPopover {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    padding: 16px 0;
+    border-radius: 0;
+    transform: none;
+    overflow-x: hidden;
+  }
+}
+
+.destinationsPopover {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  padding: 24px 0;
+  z-index: 100;
+  cursor: default;
+  width: 400px;
+}
+
+.popoverTitle {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-dark);
+  padding: 0 24px 12px;
+}
+
+.destList {
+  display: flex;
+  flex-direction: column;
+}
+
+.destItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.destItem:hover {
+  background-color: var(--background-light);
+}
+
+.destIcon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--background-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.destDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.destName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.destSub {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* Guest Dropdown */
+.guestDropdown {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.guestRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.guestRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.guestRow:first-child {
+  padding-top: 0;
+}
+
+.guestDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.guestType {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 16px;
+}
+
+.guestDesc {
+  color: var(--text-light);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.guestControls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.guestControls button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.guestControls button:hover:not(:disabled) {
+  border-color: var(--text-dark);
+  color: var(--text-dark);
+}
+
+.guestControls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.guestControls span {
+  width: 16px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+/* Flexible When Popover */
+.whenPopover {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 850px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dateTabsWrapper {
+  background-color: var(--background-light);
+  border-radius: 32px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.dateTabs {
+  display: flex;
+  align-items: center;
+}
+
+.dateTab {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  border-radius: 24px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.dateTabActive {
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.flexibleContainer {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 12px 0;
+}
+
+.flexibleTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.stayLengthPills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stayLengthPill {
+  padding: 10px 20px;
+  border-radius: 32px;
+  border: 1px solid var(--border);
+  background: white;
+  font-size: 14px;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.stayLengthPill:hover {
+  border-color: var(--text-dark);
+}
+
+.stayLengthPillActive {
+  background: var(--background-light);
+  border-color: var(--text-dark);
+  font-weight: 600;
+}
+
+.monthScroller {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px;
+  /* hide scrollbar */
+  scrollbar-width: none;
+}
+.monthScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.monthCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 120px;
+  height: 120px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.monthCard:hover {
+  border-color: var(--text-dark);
+}
+
+.monthCardActive {
+  border-color: var(--text-dark);
+  border-width: 2px;
+  background: var(--background-light);
+}
+
+.monthIcon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.monthName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.monthYear {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* --- Mobile Search Full-Screen Modal --- */
+.mobileSearchModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #f7f7f7;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mobileModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  background: white;
+  position: relative;
+}
+
+.mobileModalClose {
+  position: absolute;
+  left: 24px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.mobileModalTabs {
+  display: flex;
+  gap: 16px;
+}
+
+.mobileModalTab {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-light);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+}
+
+.mobileModalTabActive {
+  color: var(--text-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--text-dark);
+}
+
+.mobileModalBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Accordion Active Card */
+.mobileActiveCard {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileCardTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.mobileSearchInputWrap {
+  background: var(--background-light);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.mobileSearchInput {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  width: 100%;
+  outline: none;
+  font-weight: 600;
+}
+
+/* Accordion Collapsed Pill */
+.mobileCollapsedPill {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobileCollapsedLabel {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.mobileCollapsedValue {
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Sticky Footer */
+.mobileModalFooter {
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobileClearBtn {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+}
+
+.mobileSearchBtn {
+  background: linear-gradient(to right, var(--primary), #e31c5f);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

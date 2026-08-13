@@ -1,0 +1,207 @@
+.page {
+  padding: 40px 0 80px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.pageSubtitle {
+  font-size: 15px;
+  color: var(--text-light);
+  margin-bottom: 32px;
+}
+
+.section { margin-bottom: 48px; }
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tripList { display: flex; flex-direction: column; gap: 16px; }
+
+.tripCard {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.tripCard:hover { box-shadow: var(--shadow-md); }
+
+.cancelled {
+  opacity: 0.65;
+}
+
+@media (max-width: 600px) {
+  .tripCard { grid-template-columns: 1fr; }
+}
+
+.tripPhoto {
+  position: relative;
+  min-height: 160px;
+  background: var(--background-light);
+}
+
+.noPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 40px;
+}
+
+.tripInfo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tripHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.tripLocation {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.tripTitle {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.statusBadge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.statusConfirmed { background: #e8f5e9; color: #2e7d32; }
+.statusCancelled { background: #fce4ec; color: var(--primary); }
+
+.tripMeta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 744px) {
+  .tripMeta { grid-template-columns: repeat(4, 1fr); }
+}
+
+.tripMetaItem { display: flex; flex-direction: column; gap: 2px; }
+
+.tripMetaLabel {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tripMetaValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.tripActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.viewBtn, .detailBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  color: var(--text-dark);
+  transition: background 0.2s;
+}
+
+.viewBtn:hover, .detailBtn:hover { background: var(--background-light); }
+
+.cancelBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancelBtn:hover { background: #fff0f3; }
+.cancelBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.emptyState {
+  text-align: center;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyIcon { font-size: 64px; }
+
+.emptyState h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.emptyState p {
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+.exploreBtn {
+  margin-top: 12px;
+  background: var(--primary);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.exploreBtn:hover { background: var(--primary-hover); }
+
+.skeletonList { display: flex; flex-direction: column; gap: 16px; }
+
+.skeleton {
+  height: 160px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

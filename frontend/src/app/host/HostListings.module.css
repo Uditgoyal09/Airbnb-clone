@@ -1,0 +1,238 @@
+.page {
+  padding: 40px 0 80px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-light);
+}
+
+.createBtn {
+  background: var(--text-dark);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.createBtn:hover { background: var(--primary); }
+
+.listingsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+}
+
+@media (min-width: 744px) {
+  .listingsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1128px) {
+  .listingsGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.listingCard {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.listingCard:hover { box-shadow: var(--shadow-md); }
+
+.cardPhotoWrap {
+  position: relative;
+  height: 200px;
+  display: block;
+  background: var(--background-light);
+}
+
+.photoBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: white;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.noPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 40px;
+}
+
+.cardBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cardLocation {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.cardRating {
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.cardStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  background: var(--background-light);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.stat { text-align: center; }
+
+.statValue {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.statLabel {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+}
+
+.viewBtn {
+  flex: 1;
+  text-align: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: background 0.2s;
+}
+
+.viewBtn:hover { background: var(--background-light); }
+
+.editBtn {
+  padding: 8px 16px;
+  border: 1px solid var(--text-dark);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: background 0.2s;
+}
+
+.editBtn:hover { background: var(--background-light); }
+
+.deleteBtn {
+  padding: 8px 14px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.deleteBtn:hover { background: #fff0f3; }
+.deleteBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.notHost {
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.notHostIcon { font-size: 64px; margin-bottom: 16px; }
+
+.notHost h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.notHost p {
+  font-size: 16px;
+  color: var(--text-light);
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+.empty {
+  text-align: center;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyIcon { font-size: 64px; }
+.empty h2 { font-size: 24px; font-weight: 700; }
+.empty p { color: var(--text-light); }
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.skeleton {
+  height: 320px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -1,0 +1,207 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .imageContainer img {
+  transform: scale(1.03);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--background-light);
+}
+
+.imageContainer img {
+  transition: transform 0.4s ease;
+}
+
+.heartBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.heartBtn:hover {
+  transform: scale(1.1);
+}
+
+.hearted svg {
+  fill: var(--primary) !important;
+}
+
+.guestFavBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: white;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cardLocation {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardRating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dark);
+  flex-shrink: 0;
+}
+
+.cardType {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.cardPrice {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.priceAmount {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.priceNight {
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+/* Horizontal Layout for Split Map View */
+.cardHorizontal {
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  height: 220px; /* Fixed height for consistent layout */
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+}
+
+.cardHorizontal:hover .imageContainer img {
+  transform: scale(1.0); /* disable zoom for horizontal layout to match Airbnb */
+}
+
+.cardHorizontal .imageContainer {
+  width: 300px;
+  height: 200px;
+  flex-shrink: 0;
+  aspect-ratio: auto;
+}
+
+.cardHorizontal .cardInfo {
+  flex: 1;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.cardTitle {
+  font-size: 16px;
+  color: var(--text-dark);
+  font-weight: 500;
+  display: none;
+}
+
+.cardHorizontal .cardTitle {
+  display: block;
+}
+
+.cardHorizontal .cardLocation {
+  display: none; /* Hide location in horizontal view since title is shown */
+}
+
+.cardHorizontalDetails {
+  font-size: 14px;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-top: 4px;
+  flex: 1; /* Pushes price to the bottom */
+}
+
+.cardHorizontal .cardPrice {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+}
+
+@media (max-width: 744px) {
+  .cardHorizontal {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 0;
+    border-bottom: none;
+    gap: 12px;
+  }
+  
+  .cardHorizontal .imageContainer {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+  
+  .cardHorizontal .cardTitle {
+    display: none;
+  }
+  
+  .cardHorizontal .cardLocation {
+    display: block;
+  }
+  
+  .cardHorizontalDetails {
+    display: none;
+  }
+  
+  .cardHorizontal .cardPrice {
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+}
