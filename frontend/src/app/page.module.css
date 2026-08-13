@@ -94,3 +94,143 @@
   flex-direction: column;
   gap: 24px;
 }
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 8px;
+}
+
+.pageNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pageNumber:hover {
+  background-color: var(--background-light);
+}
+
+.pageNumberActive {
+  background-color: var(--text-dark);
+  color: white;
+}
+
+.pageNumberActive:hover {
+  background-color: var(--text-dark);
+}
+
+.pageButton {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--text-dark);
+  background: white;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+  background: var(--background-light);
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--border);
+  color: var(--text-light);
+}
+
+/* Horizontal Carousel Sections */
+.sectionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.sectionContainer {
+  width: 100%;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dark);
+}
+
+.carousel {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 16px;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carouselItem {
+  flex: 0 0 auto;
+  width: calc(16.666% - 20px); /* 6 columns default */
+  scroll-snap-align: start;
+}
+
+@media (max-width: 1300px) {
+  .carouselItem {
+    width: calc(20% - 19.2px); /* 5 columns */
+  }
+}
+@media (max-width: 1128px) {
+  .carouselItem {
+    width: calc(25% - 18px); /* 4 columns */
+  }
+}
+@media (max-width: 950px) {
+  .carouselItem {
+    width: calc(33.333% - 16px); /* 3 columns */
+  }
+}
+@media (max-width: 744px) {
+  .carouselItem {
+    width: calc(50% - 12px); /* 2 columns */
+  }
+}
+@media (max-width: 550px) {
+  .carouselItem {
+    width: 100%; /* 1 column */
+  }
+}

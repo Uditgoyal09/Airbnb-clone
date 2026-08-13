@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/context/AuthContext';
+import { SettingsProvider } from '@/context/SettingsContext';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,27 +20,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body>
-        <AuthProvider>
-          <Toaster
-            position="bottom-center"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                borderRadius: '12px',
-                background: '#222222',
-                color: '#fff',
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 500,
-                padding: '12px 20px',
-              },
-            }}
-          />
-          <Navbar />
-          <main style={{ minHeight: '100vh', paddingTop: '0' }}>
-            {children}
-          </main>
-          <Footer />
-        </AuthProvider>
+        <SettingsProvider>
+          <AuthProvider>
+            <Toaster
+              position="bottom-center"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  borderRadius: '12px',
+                  background: '#222222',
+                  color: '#fff',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 500,
+                  padding: '12px 20px',
+                },
+              }}
+            />
+            <Navbar />
+            <main style={{ minHeight: '100vh', paddingTop: '0' }}>
+              {children}
+            </main>
+            <Footer />
+          </AuthProvider>
+        </SettingsProvider>
       </body>
     </html>
   );

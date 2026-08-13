@@ -72,6 +72,18 @@ ul {
   }
 }
 
+.container-wide {
+  max-width: 2520px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 744px) {
+  .container-wide {
+    padding: 0 40px;
+  }
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;

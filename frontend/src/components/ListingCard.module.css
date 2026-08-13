@@ -145,10 +145,18 @@
 }
 
 .cardTitle {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-dark);
   font-weight: 500;
-  display: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardSubtitle {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 400;
 }
 
 .cardHorizontal .cardTitle {

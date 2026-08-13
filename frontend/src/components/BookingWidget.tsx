@@ -6,6 +6,7 @@ import { DateRange, Range } from 'react-date-range';
 import { format, differenceInDays, addDays, isWithinInterval, parseISO } from 'date-fns';
 import { createBooking, getListingBookings } from '@/services/api';
 import { useAuth } from '@/context/AuthContext';
+import { useSettings } from '@/context/SettingsContext';
 import toast from 'react-hot-toast';
 import styles from './BookingWidget.module.css';
 
@@ -18,11 +19,12 @@ interface BookingWidgetProps {
 
 export default function BookingWidget({ listing }: BookingWidgetProps) {
   const { user } = useAuth();
+  const { currency } = useSettings();
   const router = useRouter();
   const [dateRange, setDateRange] = useState<Range[]>([
     { startDate: new Date(), endDate: new Date(), key: 'selection' }
   ]);
-  const [hasSelectedDates, setHasSelectedDates] = useState(false);
+  const [selectionStep, setSelectionStep] = useState<0 | 1 | 2>(0);
   const [guests, setGuests] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -58,16 +60,18 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
 
   const startDate = dateRange[0].startDate;
   const endDate = dateRange[0].endDate;
-  const nights = hasSelectedDates && startDate && endDate ? differenceInDays(endDate, startDate) : 0;
-  const nightlyTotal = nights > 0 ? nights * listing.price_per_night : 0;
-  const cleaningFee = nights > 0 ? Math.round(listing.price_per_night * 0.15) : 0;
+  const nights = (selectionStep === 2 && startDate && endDate) ? differenceInDays(endDate, startDate) : 0;
+  
+  const convertedPricePerNight = Math.round(listing.price_per_night * currency.rate);
+  const nightlyTotal = nights > 0 ? nights * convertedPricePerNight : 0;
+  const cleaningFee = nights > 0 ? Math.round(convertedPricePerNight * 0.15) : 0;
   const serviceFee = nights > 0 ? Math.round(nightlyTotal * 0.14) : 0;
   const total = nightlyTotal + cleaningFee + serviceFee;
 
   const totalGuests = guestBreakdown.adults + guestBreakdown.children;
 
   const handleReserve = async () => {
-    if (!hasSelectedDates || nights <= 0) {
+    if (selectionStep !== 2 || nights <= 0) {
       toast.error('Please select check-in and check-out dates');
       return;
     }
@@ -83,7 +87,7 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
         guest_id: user.id,
         check_in: format(startDate!, 'yyyy-MM-dd'),
         check_out: format(endDate!, 'yyyy-MM-dd'),
-        total_price: total,
+        total_price: Math.round(total / currency.rate), // Save original INR value to backend
         guest_count: totalGuests,
       });
       toast.success('Booking confirmed!');
@@ -103,8 +107,8 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
     <div className={styles.widget}>
       <div className={styles.priceHeader}>
         <div>
-          <span className={styles.price}>₹{listing.price_per_night.toLocaleString('en-IN')}</span>
-          <span className={styles.night}> night</span>
+          <span className={styles.price}>{currency.symbol}{convertedPricePerNight.toLocaleString('en-IN')}</span>
+          <span className={styles.night}> / night</span>
         </div>
         <div className={styles.ratingSmall}>
           <span>★</span>
@@ -118,12 +122,12 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
         <div className={styles.dateRow} onClick={() => { setShowCalendar(!showCalendar); setShowGuests(false); }}>
           <div className={styles.dateBlock}>
             <div className={styles.dateLabel}>CHECK-IN</div>
-            <div className={styles.dateValue}>{hasSelectedDates && startDate ? format(startDate, 'MM/dd/yyyy') : 'Add date'}</div>
+            <div className={styles.dateValue}>{selectionStep >= 1 && startDate ? format(startDate, 'MM/dd/yyyy') : 'Add date'}</div>
           </div>
           <div className={styles.dateDivider}></div>
           <div className={styles.dateBlock}>
             <div className={styles.dateLabel}>CHECKOUT</div>
-            <div className={styles.dateValue}>{hasSelectedDates && endDate && nights > 0 ? format(endDate, 'MM/dd/yyyy') : 'Add date'}</div>
+            <div className={styles.dateValue}>{selectionStep === 2 && endDate && nights > 0 ? format(endDate, 'MM/dd/yyyy') : 'Add date'}</div>
           </div>
         </div>
 
@@ -133,10 +137,14 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
               ranges={dateRange}
               onChange={(item) => {
                 setDateRange([item.selection]);
-                if (item.selection.startDate && item.selection.endDate &&
-                    differenceInDays(item.selection.endDate, item.selection.startDate) > 0) {
-                  setHasSelectedDates(true);
-                  setShowCalendar(false);
+                if (item.selection.startDate && item.selection.endDate) {
+                  const diff = differenceInDays(item.selection.endDate, item.selection.startDate);
+                  if (diff === 0) {
+                    setSelectionStep(1);
+                  } else if (diff > 0) {
+                    setSelectionStep(2);
+                    setShowCalendar(false);
+                  }
                 }
               }}
               months={1}
@@ -194,20 +202,20 @@ export default function BookingWidget({ listing }: BookingWidgetProps) {
       {nights > 0 && (
         <div className={styles.breakdown}>
           <div className={styles.breakdownRow}>
-            <span>₹{listing.price_per_night.toLocaleString('en-IN')} × {nights} night{nights > 1 ? 's' : ''}</span>
-            <span>₹{nightlyTotal.toLocaleString('en-IN')}</span>
+            <span>{currency.symbol}{convertedPricePerNight.toLocaleString('en-IN')} × {nights} night{nights > 1 ? 's' : ''}</span>
+            <span>{currency.symbol}{nightlyTotal.toLocaleString('en-IN')}</span>
           </div>
           <div className={styles.breakdownRow}>
             <span className={styles.underlineText}>Cleaning fee</span>
-            <span>₹{cleaningFee.toLocaleString('en-IN')}</span>
+            <span>{currency.symbol}{cleaningFee.toLocaleString('en-IN')}</span>
           </div>
           <div className={styles.breakdownRow}>
             <span className={styles.underlineText}>Airbnb service fee</span>
-            <span>₹{serviceFee.toLocaleString('en-IN')}</span>
+            <span>{currency.symbol}{serviceFee.toLocaleString('en-IN')}</span>
           </div>
           <div className={styles.totalRow}>
             <span>Total before taxes</span>
-            <span>₹{total.toLocaleString('en-IN')}</span>
+            <span>{currency.symbol}{total.toLocaleString('en-IN')}</span>
           </div>
         </div>
       )}
